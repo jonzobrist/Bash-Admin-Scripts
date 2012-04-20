@@ -39,23 +39,26 @@ fi
 mkdir -p ${OUTPUT_DIR}
 echo "Writing keys to ${OUTPUT_DIR}"
 
-KEY_POSTFIX="_authorized_keys"
 HOME_DIR="/home"
 CHOWN_USER="root:root"
 CHMOD_PERMS="400"
+KEYFILES="id_rsa.pub id_dsa.pub identity.pub id_ecdsa.pub authorized_keys"
 
 for USER in $(/bin/ls -1 ${HOME_DIR})
  do
-	if [ -f "${HOME_DIR}/${USER}/.ssh/authorized_keys" ]
-	 then
-	 	FILE=${OUTPUT_DIR}/${USER}${KEY_POSTFIX}
-	 	echo "${USER} has public keys, copied to ${FILE}"
-		touch ${FILE}
-		chown ${CHOWN_USER} ${FILE}
-		chmod ${CHMOD_PERMS} ${FILE}
-		cp ${HOME_DIR}/${USER}/.ssh/authorized_keys ${FILE}
-	else
-		echo "${USER} has no public keys"
-	fi
+ 	for KEY in ${KEYFILES}
+	 do
+		if [ -f "${HOME_DIR}/${USER}/.ssh/${KEY}" ]
+		 then
+			FILE=${OUTPUT_DIR}/${USER}-${KEY}
+			echo "${USER} has public keys, copied to ${FILE}"
+			touch ${FILE}
+			chown ${CHOWN_USER} ${FILE}
+			chmod ${CHMOD_PERMS} ${FILE}
+			cp ${HOME_DIR}/${USER}/.ssh/authorized_keys ${FILE}
+		else
+			echo "${USER} has no public keys"
+		fi
+	done
 done
 
