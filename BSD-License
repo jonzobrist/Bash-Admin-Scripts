@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # Author : Jon Zobrist <jon@jonzobrist.com>
 # Homepage : http://www.jonzobrist.com
@@ -26,22 +25,5 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# Purpose : This script backs up directories & MySQL to a bucket in S3, and restores them
-# Usage : bluesun-setup.sh [start|stop|updateS3]
-# WARNING : Running this script with start will DELETE your local versions of whatever you have it set to backup
-# WARNING : Running this script with start will DELETE your local versions of whatever you have it set to backup
-# WARNING : Running this script with start will DELETE your local versions of whatever you have it set to backup
-
-echo "${0} called with ${@}" >> /var/log/bluesun-setup-init.log 2>&1
-case "${1}" in
-	start)
-		/etc/init.d/bluesun-setup.sh start 2>&1 >> /var/log/bluesun-setup-start.log 2>&1
-	;;
-	stop)
-		/etc/init.d/bluesun-setup.sh stop 2>&1 >> /var/log/bluesun-setup-stop.log 2>&1
-	;;
-	*)
-		#Catch any other way we're being called in a logfile
-		echo "/etc/init.d/bluesun-setup.sh start 2>&1 >> /var/log/bluesun-setup-wildcard.log 2>&1"
-	;;
-esac
+# Purpose : This script aims to gather all public ssh keys on a server and put them in a directory, with appropriate names
+# Usage : gather-public-ssh-keys.sh [Directory]

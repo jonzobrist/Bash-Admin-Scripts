@@ -29,8 +29,9 @@
 # Purpose : This script connects to a given server port
 # Usage : tcpcheck.py HOST PORT
 
-import sys
+import errno, sys
 from socket import *
+
 
 if (len(sys.argv) > 1):
 
@@ -44,6 +45,7 @@ if (len(sys.argv) > 1):
 		print "Success. Connected to " + serverHost + " on port: " + str(serverPort)
 	except:
 		print "Failure. Cannot connect to " + serverHost + " on port: " + str(serverPort)
+                sys.exit(errno.EPERM)
 else:
 	print "Usage : tcpcheck.py HOST PORT"
 

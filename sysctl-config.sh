@@ -2,6 +2,7 @@
 #vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4:
 #
 # Author : Nicolas Brousse <nicolas@brousse.info>
+# From : https://www.shell-tips.com/2010/09/13/linux-sysctl-configuration-and-tuning-script/
 #
 # Added kernel version < 2.6.33 set net.ipv4.tcp_congestion_control=htcp
 # Notes :
@@ -27,6 +28,7 @@
 # Backing up of previous sysctl.conf file
 # Merging of previous sysctl.conf settings if new settings don't override
 # tcp_available_congestion_control detection and setting
+# Updates hosted on github at https://github.com/jonzobrist/Bash-Admin-Scripts
 
 host=$(hostname)
 

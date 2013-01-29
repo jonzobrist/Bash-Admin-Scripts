@@ -29,7 +29,7 @@
 # Purpose : This script connects to a given server port a BUNCH of times
 # Usage : tcpcheck.py HOST PORT CONNECTIONS
 
-import sys
+import errno, sys
 from socket import *
 successcount = 0
 failurecount = 0
@@ -56,6 +56,10 @@ if (len(sys.argv) > 1):
 
 	print "Done with " + serverHost + " on port: " + str(serverPort)
 	print "Done. Failures : " + repr(failurecount) + " Successes : " + repr(successcount)
+        if (failurecount > 0):
+            sys.exit(errno.EPERM)
+        else:
+            sys.exit(0)
 else:
 	print "Usage : tcpcheck.py HOST PORT CONNECTIONS"
 
