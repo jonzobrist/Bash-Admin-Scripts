@@ -62,12 +62,14 @@ if [ -f "${1}" ]
 		echo "${I}"
 		ec2-modify-instance-attribute --disable-api-termination false ${I}
 		ec2-stop-instances -f ${I}
-		while !  ec2-describe-instances ${INSTANCE_ID} | grep -q stopped; do echo -n "."; sleep 1; done
+		while !  ec2-describe-instances ${I} | grep -q stopped; do echo -n "."; sleep 1; done
 		for V in $(ec2-describe-instances ${I} | grep '^BLOCKDEVICE' | awk '{ print $3 }')
 		 do
 			echo "nuking volume ${V}"
-			ec2-detach-volume ${V}
-			ec2-delete-volume ${V}
+                        echo -n "Detaching."
+                        while ec2-detach-volume ${V} 2>&1 | grep -q detached; do echo -n "."; sleep 1; done
+                        echo -n "Deleting."
+			while ec2-delete-volume ${V} 2>&1 | grep -q 'does not exist'; do echo -n "."; sleep 1; done
 		done
 		echo "disabling termination protection on ${I}"
 		ec2-modify-instance-attribute --disable-api-termination false ${I}
