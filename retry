@@ -1,0 +1,7 @@
+#!/bin/bash
+while true
+ do
+    echo "trying $@ at $(date)"
+    $@
+  sleep 1
+done
