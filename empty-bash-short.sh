@@ -25,13 +25,11 @@ then
     source /etc/${SHORT}.conf
 fi
 
-
 # Include home dir config file
 if [ -f "~/.${SHORT}" ]
 then
     source ~/.${SHORT}
 fi
-
 
 # Check options for overriding values
 while getopts "a:b:c:d:" optionName
