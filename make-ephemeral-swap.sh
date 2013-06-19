@@ -28,7 +28,7 @@
 #
 # Purpose : given a path, default is current working directory, find all files named .deb and highlight their name only
 # Usage : make-ephemeral-swap.sh <DIR> <SIZE_IN_BYTES> <NUM_TO_MAKE>
-DEBUG=1
+#DEBUG=1
 
 # Check options for overriding values
 while getopts "d:s:n:" optionName
