@@ -17,7 +17,6 @@ function try_get_old {
 
 
 function try_get {
-	# Bash download file via curl w/retry, exponential back off, and error handling
         FILE=$1
         URL=$2
         TRIES=$3
@@ -37,5 +36,11 @@ function try_get {
                         echo "Got ${FILE} from ${URL}"
                 fi
                 ((I++))
+                if [ ${I} -ge ${TRIES} ]
+                 then
+                        if [ "${DEBUG}" ]; then echo "Return code was ${RESP}"; fi
+                        break
+                fi
         done
 }
+
