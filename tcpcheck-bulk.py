@@ -37,29 +37,30 @@ count = 0
 
 if (len(sys.argv) > 1):
 
-	serverHost = sys.argv[1]		# use port from ARGV 1
-	serverPort = int(sys.argv[2])		# use port from ARGV 2
-	connectTimes = int(sys.argv[3])		# use port from ARGV 3
+    serverHost = sys.argv[1]        # use port from ARGV 1
+    serverPort = int(sys.argv[2])       # use port from ARGV 2
+    connectTimes = int(sys.argv[3])     # use port from ARGV 3
 
-	while (count < connectTimes) :
-		s = socket(AF_INET, SOCK_STREAM)	#create a TCP socket
-		try:
-			s.connect((serverHost, serverPort))	#connect to server on the port
-			s.shutdown(2)				#disconnect
-			successcount += 1
-			count += 1
-			#print "Success. " + repr(successcount) + " Connected to " + serverHost + " on port: " + str(serverPort)
-		except:
-			failurecount += 1
-			count += 1
-			#print "Failure. " + repr(failurecount) + " Cannot connect to " + serverHost + " on port: " + str(serverPort)
+    while (count < connectTimes) :
+        s = socket(AF_INET, SOCK_STREAM)    #create a TCP socket
+        s.settimeout(1)
+        try:
+            s.connect((serverHost, serverPort)) #connect to server on the port
+            s.shutdown(2)               #disconnect
+            successcount += 1
+            count += 1
+            #print "Success. " + repr(successcount) + " Connected to " + serverHost + " on port: " + str(serverPort)
+        except:
+            failurecount += 1
+            count += 1
+            #print "Failure. " + repr(failurecount) + " Cannot connect to " + serverHost + " on port: " + str(serverPort)
 
-	print "Done with " + serverHost + " on port: " + str(serverPort)
-	print "Done. Failures : " + repr(failurecount) + " Successes : " + repr(successcount)
-        if (failurecount > 0):
-            sys.exit(errno.EPERM)
-        else:
-            sys.exit(0)
+    print "Done with " + serverHost + " on port: " + str(serverPort)
+    print "Done. Failures : " + repr(failurecount) + " Successes : " + repr(successcount)
+    if (failurecount > 0):
+        sys.exit(errno.EPERM)
+    else:
+        sys.exit(0)
 else:
-	print "Usage : tcpcheck.py HOST PORT CONNECTIONS"
+    print "Usage : tcpcheck.py HOST PORT CONNECTIONS"
 
