@@ -1,7 +1,12 @@
 #!/bin/bash
+i=1
+
 while true
  do
-    echo "trying $@ at $(date)"
-    $@
-  sleep 1
+  echo "trying $@ at `date` [attempt: ${i}]"
+  $@
+  let "sleep_time = ${i} * ${i}"
+  echo "sleeping ${sleep_time}"
+  sleep ${sleep_time}
+  ((i++))
 done
