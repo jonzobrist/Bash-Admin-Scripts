@@ -132,8 +132,8 @@ net.ipv4.ip_forward = 0
 # No controls source route verification (RFC1812)
 net.ipv4.conf.default.rp_filter = 0
 
-# Enable fast recycling TIME-WAIT sockets
-net.ipv4.tcp_tw_recycle = 1
+# Enable faster reuse for TIME-WAIT sockets
+net.ipv4.tcp_tw_reuse = 1
 
 # TODO : change TCP_SYNQ_HSIZE in include/net/tcp.h
 # to keep TCP_SYNQ_HSIZE*16<=tcp_max_syn_backlog
