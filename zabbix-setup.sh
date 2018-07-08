@@ -61,7 +61,7 @@ service zabbix-agent stop
 
 # Authenticate with Zabbix API
 authenticate() {
-curl -i -X POST -H 'Content-Type: application/json-rpc' -d "{\"params\": {\"password\": \"$ZABBIX_PASS\", \"user\": \"$ZABBIX_USER\"}, \"jsonrpc\":\"2.0\", \"method\": \"user.authenticate\",\"auth\": \"\", \"id\": 0}" $API | grep -Eo 'Set-Cookie: zbx_sessionid=.+' | head -n 1 | cut -d '=' -f 2 | tr -d '\r'
+curl -i -X POST -H 'Content-Type: application/json-rpc' -d "{\"params\": {\"password\": \"$ZABBIX_PASS\", \"user\": \"$ZABBIX_USER\"}, \"jsonrpc\":\"2.0\", \"method\": \"user.login\",\"id\": 0}" $API | grep result | cut -d '"' -f 8
 }
 AUTH_TOKEN=$(authenticate)
 
