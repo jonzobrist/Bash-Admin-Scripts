@@ -42,7 +42,7 @@ for cipher in ${ciphers[@]}
 do
 echo -n Testing $cipher...
 result=$(echo -n | openssl s_client -cipher "$cipher" -connect $SERVER:$PORT 2>&1)
-if [[ "$result" =~ ":error:" ]] ; then
+if [ $? != 0 ] ; then
   error=$(echo -n $result | cut -d':' -f6)
   echo NO \($error\)
 else
