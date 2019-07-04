@@ -44,7 +44,7 @@ MAILCHECK=0
 
 autoload -U colors
 
-if [ "${HOME}" = "/Users/${USER}" ]
+if [ "${UNAME}" = "Darwin" ]
  then
     alias md5sum='md5 -r '
 fi
