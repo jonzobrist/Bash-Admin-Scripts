@@ -29,6 +29,21 @@
 # .zshrc is sourced in interactive shells.
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
+#
+# To get this working to the max do these steps after installing ZSH
+#
+# Put this file (.zshrc) in your home dir
+# $ curl -o ${HOME}/.zshrc https://raw.githubusercontent.com/jonzobrist/Bash-Admin-Scripts/master/.zshrc
+# Setup zpresto from https://github.com/sorin-ionescu/prezto
+# $ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+# $ setopt EXTENDED_GLOB
+# $ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+# $   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+# $ done
+#
+# Now change your default shell to zsh
+# $ chsh -s `which zsh`
+# Now logout and back in
 ##################################
 
 # Source Prezto.
