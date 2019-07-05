@@ -182,8 +182,8 @@ declare -x PATH="${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/l
 possible_path_dirs=("/usr/local/app1/bin" "${HOME}/app2/bin")
 for path_dir in ${possible_path_dirs[@]}
  do
-   if [ -d ${apollo_dir} ]; then
-     declare -x PATH=$PATH:${apollo_dir}
+   if [ -d ${path_dir} ]; then
+     declare -x PATH=$PATH:${path_dir}
    fi
 done
 
