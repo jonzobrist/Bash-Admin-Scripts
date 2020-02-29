@@ -201,6 +201,11 @@ function get_dropped_hosts_kernlog() {
 }
 
 # I keep my local ssh agent info in this file, and if it's there we should source it
+# I use https://github.com/jonzobrist/Bash-Admin-Scripts/blob/master/sshsetup.sh
+# Which I run on boot like
+# sshsetup
+# source ~/.ssh/myagent
+# ssh-add
 if [ -f "${HOME}/.ssh/myagent" ]
 then
     source ${HOME}/.ssh/myagent
