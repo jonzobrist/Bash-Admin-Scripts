@@ -459,14 +459,17 @@ ph() {
 # and cd's to its dirname if it is
 #
 function cdd() {
-    if [ ! -f "{1}" ]
-     then
-        D=$(dirname ${1})
-    else
-        D="${1}"
-    fi
-    cd ${F}
+	if [ "${1}" ] && [ -f "${F}" ]
+	 then
+		DEBUG "switching dir to ${F}, base of ${1}"
+		pushd $(dirname ${F})
+	elif [ "${1}" ] && [ -d "${F}" ]
+	 then
+		DEBUG "switching dir to ${F}, (was directory)"
+		pushd ${F}
+	fi
 }
+
 
 # What is with Apple lately?
 # I feel like OS X is now as reliable as Windows 98 at its peak
