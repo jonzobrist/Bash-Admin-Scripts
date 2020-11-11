@@ -656,6 +656,17 @@ function aws_random_subnet() {
     echo "${MY_SUBNET}"
 }
 
+
+despace () {
+    # Given file as arg, rename it, replacing ' ' with '_'
+    # Cuz files should not have spaces in them, or anything that requires escaping to use
+    if [ -f "${1}" ]
+    then
+        F=$(ls -1 ${1} | sed -e 's/ /_/g')
+        mv -i ${1} ${F}
+    fi
+}
+
 # global ZSH aliases
 # SUS - get top 25 of whatever with counts
 alias -g SUS=" | sort | uniq -c | sort -nr | head -n 25"
