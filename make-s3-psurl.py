@@ -13,18 +13,18 @@
 # aws configure
 # (enter your AWS credentials, follow prompts)
 
-import boto3
+import boto
 import argparse
 from botocore.client import Config
 
 
 def presign_url(bucket, key, expiry, profile, region):
     # Get the service client with sigv4 configured
-    #session = boto3.Session(profile_name=profile_name)
-    session = boto3.Session(region_name=region, profile_name=profile)
-    s3 = session.client('s3', config=Config(), region_name=region)
+    #session = boto.Session(profile_name=profile_name)
+    session = boto.Session(region_name=region, profile_name=profile)
+    s3 = session.client('s3', config=Config(signature_version='s3v4'), region_name=region)
 #    s3 = session.client('s3', config=Config())
-    #s3 = boto3.client('s3', config=Config(signature_version='s3v4'))
+    #s3 = boto.client('s3', config=Config(signature_version='s3v4'))
     # Generate the URL to get 'key-name' from 'bucket-name'
     # URL expires in expiry seconds (default 86400 seconds or 1 day)
     url = s3.generate_presigned_url(
