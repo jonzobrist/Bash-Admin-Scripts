@@ -1,4 +1,5 @@
 #!/bin/bash
+
 DEBUG () {
 	if [ "${DEBUG}" ]
 	then
@@ -20,16 +21,17 @@ if [ -f "env.sh" ]
     declare -x IP_LOOKUP="$(ip route get 8.8.8.8 | awk '{for(i=1;i<=NF;i++) if ($i=="src") print $(i+1)}')"
     declare -x IP="${IP:-$IP_LOOKUP}"
     declare -x VIRTUAL_HOST="${VIRTUAL_HOST:-pihole.local}"
-    declare -x SERVER_PORT="${SERVER_PORT:-80}"
+    declare -x SERVER_PORT="${SERVER_PORT:-8080}"
     declare -x M_DNS="${M_DNS:-127.0.0.1}"
     declare -x N_DNS="${N_DNS:-1.1.1.1}"
     declare -x TZ="${TZ:-US/Pacific}"
+    declare -x NET_TYPE="${NET_TYPE:-bridge}" # can change to host if you want to use pihole DHCP
 fi
 
 declare -x FORCE_UPDATE=${FORCE_UPDATE:-0}
 declare -x UPDATE=0
 
-if [ -z ${IP} ] || [ -z ${IP_LOOKUP} ] || [ -z ${N_DNS} ] || [ -z ${PI_BASE} ] || [ -z ${PI_DNSM} ] || [ -z ${PI_ETC} ] || [ -z ${PI_LIGHTTPD} ] || [ -z ${PI_LOG} ] || [ -z ${SERVER_PORT} ] || [ -z ${TZ} ] || [ -z ${VIRTUAL_HOST} ] || [ -z ${WEB_PASS} ]
+if [ -z ${IP} ] || [ -z ${IP_LOOKUP} ] || [ -z ${N_DNS} ] || [ -z ${PI_BASE} ] || [ -z ${PI_DNSM} ] || [ -z ${PI_ETC} ] || [ -z ${PI_LIGHTTPD} ] || [ -z ${PI_LOG} ] || [ -z ${SERVER_PORT} ] || [ -z ${TZ} ] || [ -z ${VIRTUAL_HOST} ] || [ -z ${WEB_PASS} ] || [ -z ${NET_TYPE} ]
  then
     echo "Exiting, not all variables are set, check env.sh"
     DEBUG "Var IP = ${IP}"
@@ -44,6 +46,7 @@ if [ -z ${IP} ] || [ -z ${IP_LOOKUP} ] || [ -z ${N_DNS} ] || [ -z ${PI_BASE} ] |
     DEBUG "Var TZ = ${TZ}"
     DEBUG "Var VIRTUAL_HOST = ${VIRTUAL_HOST}"
     DEBUG "Var WEB_PASS = ${WEB_PASS}"
+    DEBUG "Var NET_TYPE = ${NET_TYPE}"
     exit 1
 else
     UPDATE_OUTPUT=$(docker pull pihole/pihole)
@@ -65,9 +68,10 @@ else
         DEBUG "Wipping pihole: docker rm -f pihole"
         docker rm -f pihole
         DEBUG "Running Pihole in Docker:"
-	DEBUG "docker run -d --name pihole --hostname pihole --net=host -e TZ=\"${TZ}\" -e WEBPASSWORD=\"${WEB_PASS}\" -e IPV4_ADDRESS=\"${IP}\" -e VIRTUAL_HOST=\"${VIRTUAL_HOST}\" -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest"
-        docker run -d --name pihole --hostname pihole --net=host -e TZ="${TZ}" -e WEBPASSWORD="${WEB_PASS}" -e IPV4_ADDRESS="${IP}" -e VIRTUAL_HOST="${VIRTUAL_HOST}" -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
+	DEBUG "docker run -d --name pihole --hostname pihole --net=${NET_TYPE} -e TZ=\"${TZ}\" -e WEBPASSWORD=\"${WEB_PASS}\" -e IPV4_ADDRESS=\"${IP}\" -e VIRTUAL_HOST=\"${VIRTUAL_HOST}\" -e VIRTUAL_PORT=${SERVER_PORT} -v ${PI_ETC} -v ${PI_DNSM} -p 53:53/tcp -p 53:53/udp -p ${SERVER_PORT}:8080 --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest"
+        docker run -d --name pihole --hostname pihole --net=${NET_TYPE} -e TZ="${TZ}" -e WEBPASSWORD="${WEB_PASS}" -e IPV4_ADDRESS="${IP}" -e VIRTUAL_HOST="${VIRTUAL_HOST}" -e VIRTUAL_PORT=${SERVER_PORT} -p 53:53/tcp -p 53:53/udp -p ${SERVER_PORT}:8080 -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
     else
         echo "Docker images not updated, skipping restart at $(date)"
     fi
 fi
+
