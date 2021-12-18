@@ -1,4 +1,11 @@
 #!/bin/bash
+DEBUG () {
+	if [ "${DEBUG}" ]
+	then
+		echo "${1}"
+	fi
+}
+
 if [ -f "env.sh" ]
  then
     source env.sh
@@ -19,6 +26,34 @@ if [ -f "env.sh" ]
     declare -x TZ="${TZ:-US/Pacific}"
 fi
 
-docker pull pihole/pihole
-docker rm -f pihole
-docker run -d --name pihole --hostname taco --net=host -e TZ="${TZ}" -e WEBPASSWORD="${WEB_PASS}" -e IPV4_ADDRESS="${IP}" -e VIRTUAL_HOST="${VIRTUAL_HOST}" -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
+if [ -z ${IP} ] || [ -z ${IP_LOOKUP} ] || [ -z ${N_DNS} ] || [ -z ${PI_BASE} ] || [ -z ${PI_DNSM} ] || [ -z ${PI_ETC} ] || [ -z ${PI_LIGHTTPD} ] || [ -z ${PI_LOG} ] || [ -z ${SERVER_PORT} ] || [ -z ${TZ} ] || [ -z ${VIRTUAL_HOST} ] || [ -z ${WEB_PASS} ]
+ then
+    echo "Exiting, not all variables are set, check env.sh"
+    DEBUG "Var IP = ${IP}"
+    DEBUG "Var IP_LOOKUP = ${IP_LOOKUP}"
+    DEBUG "Var N_DNS = ${N_DNS}"
+    DEBUG "Var PI_BASE = ${PI_BASE}"
+    DEBUG "Var PI_DNSM = ${PI_DNSM}"
+    DEBUG "Var PI_ETC = ${PI_ETC}"
+    DEBUG "Var PI_LIGHTTPD = ${PI_LIGHTTPD}"
+    DEBUG "Var PI_LOG = ${PI_LOG}"
+    DEBUG "Var SERVER_PORT = ${SERVER_PORT}"
+    DEBUG "Var TZ = ${TZ}"
+    DEBUG "Var VIRTUAL_HOST = ${VIRTUAL_HOST}"
+    DEBUG "Var WEB_PASS = ${WEB_PASS}"
+    exit 1
+else
+    UPDATE_OUTPUT=$(docker pull pihole/pihole)
+    RETCODE=$?
+    DEBUG "UPDATE_OUTPUT:"
+    DEBUG "${UPDATE_OUTPUT}"
+    NO_UPDATE=$(echo ${UPDATE_OUTPUT} | grep 'Image is up to date')
+    DEBUG "Var NO_UPDATE = ${NO_UPDATE}"
+    if [ ${RETCODE} == 0 ] && [ -z "${NO_UPDATE}" ]
+     then
+        docker rm -f pihole
+        docker run -d --name pihole --hostname taco --net=host -e TZ="${TZ}" -e WEBPASSWORD="${WEB_PASS}" -e IPV4_ADDRESS="${IP}" -e VIRTUAL_HOST="${VIRTUAL_HOST}" -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
+    else
+        echo "Docker images not updated, skipping restart at $(date)"
+    fi
+fi
