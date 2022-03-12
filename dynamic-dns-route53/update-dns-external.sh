@@ -54,17 +54,16 @@ if [ "${CONFIG_FILE}" ]
     if [ -e "${CONFIG_FILE}" ]
      then
         DEBUG "Using config file"
-        echo "Using config file"
         # shellcheck source=/dev/null
         source "${CONFIG_FILE}"
     fi
 else
-    DEBUG "NOT using a config file"
-    echo "NOT using a config file"
+    DEBUG "NOT using a config file, variables loaded from script"
     # Do you want DEBUG on? Anything true will be on (1, true, randomstring), false (0/unset) will be off
     DEBUG=${DEBUG:-0}
     export DEBUG
 
+    # TODO: add test only mode
     # Maybe you only want to test the API call to Route 53, set this true
     TEST_ONLY_MODE=1
     export TEST_ONLY_MODE
@@ -88,6 +87,8 @@ else
     export HOSTED_ZONE_ID
 
     # Location of a file to record the last public IP we saw
+    # This used to be used but I now check R53 setting instead of tracking
+    # todo: remove last_ip
     LAST_IP_FILE="${HOME}/etc/lastpublicip"
     export LAST_IP_FILE
 
@@ -237,10 +238,10 @@ if [ -x "${AWS_CMD}" ] || [ -x "${CURL_CMD}" ] || [ -x "${GREP_CMD}" ] || { [ -x
         #CSV Format is:
         #DAY, Unix time, current IP, last IP
         DEBUG "CSV file is ${CSV_HISTORY}"
-        echo "$(date +%F),$(date +%s),${IP},${LAST_IP}" >> "${CSV_HISTORY}"
+        echo "$(date +%F),$(date +%s),${IP},${R53IP}" >> "${CSV_HISTORY}"
     else
         DEBUG "CSV file is NOT set, not emitting"
-        DEBUG "$(date +%F),$(date +%s),${IP},${LAST_IP}"
+        DEBUG "$(date +%F),$(date +%s),${IP},${R53IP}"
         fi
 
     # http://docs.aws.amazon.com/cli/latest/reference/route53/change-resource-record-sets.html
@@ -251,8 +252,8 @@ if [ -x "${AWS_CMD}" ] || [ -x "${CURL_CMD}" ] || [ -x "${GREP_CMD}" ] || { [ -x
         /bin/rm "${LAST_IP_FILE}"
         echo "${IP}" > "${LAST_IP_FILE}"
     else
-        DEBUG "Public IP ${R53IP} matches last public DNS ${LAST_IP}, skipping updating at $(date)"
-        echo "IP matches public, skipping updating at $(date)"
+        DEBUG "Public IP ${IP} matches last public DNS ${R53IP}, skipping updating at $(date)"
+	echo "IP (${IP}) unchanged from R53IP(${R53IP}), skipping updating at $(date)"
         exit 0
     fi
 ################################################################
