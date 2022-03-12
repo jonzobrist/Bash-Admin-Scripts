@@ -88,7 +88,6 @@ else
 
     # Location of a file to record the last public IP we saw
     # This used to be used but I now check R53 setting instead of tracking
-    # todo: remove last_ip
     LAST_IP_FILE="${HOME}/etc/lastpublicip"
     export LAST_IP_FILE
 
