@@ -1,0 +1,12 @@
+{
+            "Comment": "UPSERT record",
+            "Changes": [{
+            "Action": "UPSERT",
+                        "ResourceRecordSet": {
+                                    "Name": "RECORD_NAME",
+                                    "Type": "A",
+                                    "TTL": 300,
+                                 "ResourceRecords": [{ "Value": "RECORD_VALUE"}]
+                        }
+            }]
+}
