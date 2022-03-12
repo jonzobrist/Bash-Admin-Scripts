@@ -37,3 +37,11 @@ Typically from crontab something like
 */15 * * * * /home/ubuntu/bin/update-dns-external.sh >> ${HOME}/logs/dns-external.log
 ```
 
+### Troubleshooting ###
+If it isn't working, enable DEBUG either in the config or in your console, and re-run it and look through the output to see where it failed
+```
+declare -x DEBUG=1
+```
+
+If in DEBUG you see a variable called out as set or being used but the value doesn't appear, double-check your setup to make sure it's correct.
+
