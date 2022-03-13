@@ -1,8 +1,11 @@
+## Collection of bash snippets, scripts, and utilized I've accumulated/written/altered/impaired over the years ##
+
 This collection is authored by Jon Zobrist <jon@jonzobrist.com>
 My website - http://www.jonzobrist.com/
 Follow me on Twitter @jonzobrist
 
 All included files are licensed under the BSD License
+No warranty express or implied
 
 ######################################################
 # Author : Jon Zobrist <jon@jonzobrist.com>
