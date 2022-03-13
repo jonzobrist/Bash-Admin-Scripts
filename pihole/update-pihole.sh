@@ -68,8 +68,8 @@ else
         DEBUG "Wipping pihole: docker rm -f pihole"
         docker rm -f pihole
         DEBUG "Running Pihole in Docker:"
-	DEBUG "docker run -d --name pihole --hostname pihole --net=${NET_TYPE} -e TZ=\"${TZ}\" -e WEBPASSWORD=\"${WEB_PASS}\" -e IPV4_ADDRESS=\"${IP}\" -e VIRTUAL_HOST=\"${VIRTUAL_HOST}\" -e VIRTUAL_PORT=${SERVER_PORT} -v ${PI_ETC} -v ${PI_DNSM} -p 53:53/tcp -p 53:53/udp -p ${SERVER_PORT}:8080 --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest"
-        docker run -d --name pihole --hostname pihole --net=${NET_TYPE} -e TZ="${TZ}" -e WEBPASSWORD="${WEB_PASS}" -e IPV4_ADDRESS="${IP}" -e VIRTUAL_HOST="${VIRTUAL_HOST}" -e VIRTUAL_PORT=${SERVER_PORT} -p 53:53/tcp -p 53:53/udp -p ${SERVER_PORT}:8080 -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
+	DEBUG "docker run -d --name pihole --hostname pihole --net=${NET_TYPE} -e TZ=\"${TZ}\" -e WEBPASSWORD=\"${WEB_PASS}\" -e IPV4_ADDRESS=\"${IP}\" -e VIRTUAL_HOST=\"${VIRTUAL_HOST}\" -e VIRTUAL_PORT=${SERVER_PORT} -v ${PI_ETC} -v ${PI_DNSM} -p 53:53/tcp -p 53:53/udp -p ${SERVER_PORT}:80 --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest"
+        docker run -d --name pihole --hostname pihole --net=${NET_TYPE} -e TZ="${TZ}" -e WEBPASSWORD="${WEB_PASS}" -e IPV4_ADDRESS="${IP}" -e VIRTUAL_HOST="${VIRTUAL_HOST}" -e VIRTUAL_PORT=${SERVER_PORT} -p 53:53/tcp -p 53:53/udp -p ${SERVER_PORT}:80 -v ${PI_ETC} -v ${PI_DNSM} --dns=${M_DNS} --dns=${N_DNS} --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
     else
         echo "Docker images not updated, skipping restart at $(date)"
     fi
