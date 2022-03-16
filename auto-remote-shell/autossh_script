@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Lifted most of this from https://askubuntu.com/questions/850388/making-a-crontab-reversed-ssh-connection-using-script
+# But the ssh args did not work for me or what I wanted, so I tweaked them
+targetuser=SSH_USER
+
+runTest=false
+runRepair=false
+
+case $1 in
+  test)
+    runTest=true
+  ;;
+  repair)
+    runRepair=true
+    repairExitCode=$2
+  ;;
+  *)
+    echo 'Error: script needs to be run by watchdog' 1>&2
+    exit 1
+  ;;
+esac
+
+if ${runTest}; then
+  #run a test here which will tell the status of your process
+  #the exit code of this script will be the repairExitCode if it is non-zero
+  if ! pgrep autossh -u ${targetuser} &> /dev/null; then
+    #autossh not running; notify watchdog to repair
+    exit 1
+  else
+    #autossh running; no action necessary
+    exit 0
+  fi
+fi
+
+if ${runRepair}; then
+  #take an action to repair the affected item
+  #use a case statement on $repairExitCode to handle different failure cases
+#  su - ${targetuser} -c 'nohup autossh -f -CNR 127.0.0.1:4222:127.0.0.1:22 HOMEBASE_SERVER_ADDRESS'
+  su - ${targetuser} -c 'nohup autossh -f -CNR 127.0.0.1:R_PORT:127.0.0.1:22 HOMEBASE_SERVER_ADDRESS'
+  exit 0
+fi
