@@ -1,0 +1,79 @@
+https://ubuntu.com/core/docs/networkmanager/configure-cellular-connections
+
+Basically i8nstall modem manager, this gives you mmcli (modem manager cli)
+You should have nmcli (network manager cli)
+
+# This isn't needed since you can use '*' instead of the specific device
+MODEM_PORT=$(mmcli -m 0  |grep 'primary port:' | awk '{ print $4 }'); echo ${MODEM_PORT}
+cdc-wdm0
+
+MODEM_DEV=$(mmcli -m 0  |grep 'device: ' | awk '{ print $4 }'); echo ${MODEM_DEV}
+/sys/devices/platform/soc/ffe09000.usb/ff500000.usb/xhci-hcd.2.auto/usb1/1-1/1-1.3
+
+# Just let network manager guess the only modem installed
+# and set it up for Ting as ting0 apn for their newer 5G where APN is wholesale
+nmcli c add type gsm ifname '*' con-name ting0 apn wholesale
+
+# show the network connections
+nmcli c
+
+# Setup wifi
+
+up [id | uuid | path] ID [ifname ifname] [ap BSSID] [passwd-file file]
+           Activate a connection. The connection is identified by its name, UUID or D-Bus path. If ID is
+           ambiguous, a keyword id, uuid or path can be used. When requiring a particular device to
+           activate the connection on, the ifname option with interface name should be given. If the ID is
+           not given an ifname is required, and NetworkManager will activate the best available connection
+           for the given ifname. In case of a VPN connection, the ifname option specifies the device of the
+           base connection. The ap option specify what particular AP should be used in case of a Wi-Fi
+           connection.
+    passwd-file
+               some networks may require credentials during activation. You can give these credentials
+               using this option. Each line of the file should contain one password in the form:
+
+                   setting_name.property_name:the password
+
+               For example, for WPA Wi-Fi with PSK, the line would be
+
+                   802-11-wireless-security.psk:secret12345
+
+    nmcli device status
+           shows the status for all devices.
+
+       nmcli dev disconnect em2
+           disconnects a connection on interface em2 and marks the device as unavailable for
+           auto-connecting. As a result, no connection will automatically be activated on the device until
+           the device's 'autoconnect' is set to TRUE or the user manually activates a connection.
+
+       nmcli -f GENERAL,WIFI-PROPERTIES dev show wlan0
+           shows details for wlan0 interface; only GENERAL and WIFI-PROPERTIES sections will be shown.
+
+       nmcli -f CONNECTIONS device show wlp3s0
+           shows all available connection profiles for your Wi-Fi interface wlp3s0.
+
+       nmcli dev wifi
+           lists available Wi-Fi access points known to NetworkManager.
+
+       nmcli dev wifi con "Cafe Hotspot 1" password caffeine name "My cafe"
+           creates a new connection named "My cafe" and then connects it to "Cafe Hotspot 1" SSID using
+           password "caffeine". This is mainly useful when connecting to "Cafe Hotspot 1" for the first
+           time. Next time, it is better to use nmcli con up id "My cafe" so that the existing connection
+           profile can be used and no additional is created.
+
+       nmcli -s dev wifi hotspot con-name QuickHotspot
+           creates a hotspot profile and connects it. Prints the hotspot password the user should use to
+           connect to the hotspot from other devices.
+
+
+# no wrky
+# nmcli c add type wifi ifname '*' ap WIFI_SSID 
+
+nmcli c add type wifi ifname '*' ap WIFI_SSID 
+nmcli dev wifi con "WIFI_SSID" password 'WIFII_PASS' name 'WIFI_SSID'
+
+# After setting them up, there are files in /etc/NetworkManager/system-connections
+# for each config, by name
+
+WIFI_SSID.nmconnection
+ting0.nmconnection
+
