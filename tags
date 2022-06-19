@@ -1,0 +1,124 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/zob/src/Bash-Admin-Scripts/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+0	dynamic-dns-route53/external.json	/^                                 "ResourceRecords": [{ "Value": "RECORD_VALUE"}]$/;"	o	array:Changes.0.ResourceRecordSet.ResourceRecords
+0	dynamic-dns-route53/external.json	/^            "Changes": [{$/;"	o	array:Changes
+APEXD	dynamic-dns-route53/update-dns-external.conf	/^APEXD=${FQDN#*.}$/;"	k
+ARCHIVE	bluesun-setup/server.conf	/^ARCHIVE=1 #1 enables archiving every file that is put to S3, so there will be 1 file created, an/;"	k
+AWS_PROFILE	dynamic-dns-route53/update-dns-external.conf	/^AWS_PROFILE="default"$/;"	k
+Action	dynamic-dns-route53/external.json	/^            "Action": "UPSERT",$/;"	s	object:Changes.0
+Auto Remote Shell	auto-remote-shell/README.md	/^## Auto Remote Shell ##$/;"	s
+CSV_HISTORY	dynamic-dns-route53/update-dns-external.conf	/^CSV_HISTORY="${HOME}\/etc\/ip-log-change-$(date +%Y).csv"$/;"	k
+Changes	dynamic-dns-route53/external.json	/^            "Changes": [{$/;"	a
+Collection of bash snippets, scripts, and utilized I've accumulated/written/altered/impaired over the years	README.md	/^## Collection of bash snippets, scripts, and utilized I've accumulated\/written\/altered\/impair/;"	s
+Comment	dynamic-dns-route53/external.json	/^            "Comment": "UPSERT record",$/;"	s
+Configure	auto-remote-shell/README.md	/^### Configure ###$/;"	S	section:Auto Remote Shell
+Confirm your setup is working	auto-remote-shell/README.md	/^### Confirm your setup is working ###$/;"	S	section:Auto Remote Shell
+DEBUG	bluesun-setup/server.conf	/^DEBUG=1 # 0 disabled (silent), 1 enabled (DEBUG)$/;"	k
+DEBUG	dynamic-dns-route53/update-dns-external.conf	/^DEBUG=${DEBUG:-0}$/;"	k
+DEBUG	dynamic-dns-route53/update-dns-external.sh	/^DEBUG () {$/;"	f
+DEBUG	pihole/update-pihole.sh	/^DEBUG () {$/;"	f
+DIRS	bluesun-setup/server.conf	/^DIRS="\/var\/www \/etc\/apache2"$/;"	k
+Dynamic DNS with Amazon Route 53 in Bash/command line	dynamic-dns-route53/README.md	/^## Dynamic DNS with Amazon Route 53 in Bash\/command line ##$/;"	s
+ENDFILENAME	bluesun-setup/server.conf	/^ENDFILENAME="latest.sql.gz" #Set this to the suffix you want for the end of the latest\/current /;"	k
+EOF	sysctl-config.sh	/^>\/etc\/sysctl.conf cat << EOF $/;"	h
+EXTERNAL_JSON_TEMPLATE	dynamic-dns-route53/update-dns-external.conf	/^EXTERNAL_JSON_TEMPLATE="${HOME}\/etc\/external.json"$/;"	k
+FQDN	dynamic-dns-route53/update-dns-external.conf	/^FQDN="host.example.com."$/;"	k
+Fast Setup on Raspberry Pi running Raspbian 11 (bullseye)	auto-remote-shell/README.md	/^### Fast Setup on Raspberry Pi running Raspbian 11 (bullseye) ###$/;"	S	section:Auto Remote Shell
+HOST	dynamic-dns-route53/update-dns-external.conf	/^HOST=${FQDN%%.*}$/;"	k
+HOSTED_ZONE_ID	dynamic-dns-route53/update-dns-external.conf	/^HOSTED_ZONE_ID="AWSZONEID"$/;"	k
+IP_HTTP_URL	dynamic-dns-route53/update-dns-external.conf	/^IP_HTTP_URL="https:\/\/www.dangfast.com\/ip"$/;"	k
+LAST_IP_FILE	dynamic-dns-route53/update-dns-external.conf	/^LAST_IP_FILE="${HOME}\/etc\/lastpublicip"$/;"	k
+MAX_WAIT_FOR_MYSQL	bluesun-setup/server.conf	/^MAX_WAIT_FOR_MYSQL=300 #Set this to the longest time you want to wait for MySQL before aborting$/;"	k
+MYSQLDUMP_ARGS	bluesun-setup/server.conf	/^MYSQLDUMP_ARGS="--single-transaction --add-drop-table=TRUE --lock-tables=TRUE --replace=true --e/;"	k
+MYSQL_FILENAME	bluesun-setup/server.conf	/^MYSQL_FILENAME="mysqldump-${ENDFILENAME}" #Filename of a FULL mysql database backup, is restored/;"	k
+Manual Setup on Generic Linux w/dpkg###	auto-remote-shell/README.md	/^### Manual Setup on Generic Linux w\/dpkg###$/;"	S	section:Auto Remote Shell
+Name	dynamic-dns-route53/external.json	/^                                    "Name": "RECORD_NAME",$/;"	s	object:Changes.0.ResourceRecordSet
+Notes	auto-remote-shell/README.md	/^### Notes ###$/;"	S	section:Auto Remote Shell
+PATH	bluesun-setup/server.conf	/^PATH="${PATH}:\/usr\/local\/bin:\/usr\/local\/programs\/aws\/bin"$/;"	k
+PINGFILE	bluesun-setup/server.conf	/^PINGFILE="\/var\/www\/example.com\/ping.html" #Set this to where the Elastic Load Balancer check/;"	k
+PRINT_ERROR_HELP_AND_EXIT	empty-bash-short.sh	/^function PRINT_ERROR_HELP_AND_EXIT {$/;"	f
+Purpose : This script aims to provide dynamic DNS names using Amazon Route 53	dynamic-dns-route53/README.md	/^### Purpose : This script aims to provide dynamic DNS names using Amazon Route 53 ###$/;"	S	section:Dynamic DNS with Amazon Route 53 in Bash/command line
+Requires:	dynamic-dns-route53/README.md	/^### Requires: ###$/;"	S	section:Dynamic DNS with Amazon Route 53 in Bash/command line
+ResourceRecordSet	dynamic-dns-route53/external.json	/^                        "ResourceRecordSet": {$/;"	o	object:Changes.0
+ResourceRecords	dynamic-dns-route53/external.json	/^                                 "ResourceRecords": [{ "Value": "RECORD_VALUE"}]$/;"	a	object:Changes.0.ResourceRecordSet
+S3_BUCKET	bluesun-setup/server.conf	/^S3_BUCKET="www-backups.example.com" #S3 bucket named where you will store all the files$/;"	k
+Setup:	dynamic-dns-route53/README.md	/^### Setup: ###$/;"	S	section:Dynamic DNS with Amazon Route 53 in Bash/command line
+TIMESTAMP	bluesun-setup/server.conf	/^TIMESTAMP=`date +%F-%s` #change here if you want a format other than 2011-07-23-1311447264, avoi/;"	k
+TMPDIR	bluesun-setup/server.conf	/^TMPDIR="\/tmp\/bluesun-update-`hostname`-`date +%F-%s`"$/;"	k
+TTL	dynamic-dns-route53/external.json	/^                                    "TTL": 300,$/;"	n	object:Changes.0.ResourceRecordSet
+TrimWhiteSpace	.vimrc	/^fun! TrimWhiteSpace()$/;"	f
+Troubleshooting	dynamic-dns-route53/README.md	/^### Troubleshooting ###$/;"	S	section:Dynamic DNS with Amazon Route 53 in Bash/command line
+Type	dynamic-dns-route53/external.json	/^                                    "Type": "A",$/;"	s	object:Changes.0.ResourceRecordSet
+USE_R53_API	dynamic-dns-route53/update-dns-external.conf	/^USE_R53_API=0$/;"	k
+Value	dynamic-dns-route53/external.json	/^                                 "ResourceRecords": [{ "Value": "RECORD_VALUE"}]$/;"	s	object:Changes.0.ResourceRecordSet.ResourceRecords.0
+ZOB	.vimrc	/^augroup ZOB$/;"	a
+args	make-s3-psurl.py	/^    args = parser.parse_args()$/;"	v
+authenticate	zabbix-setup.sh	/^authenticate() {$/;"	f
+check_instance	setup-ec2-raid-0.sh	/^function check_instance {$/;"	f
+check_mysql_ready	bluesun-setup/bluesun-setup.sh	/^function check_mysql_ready {$/;"	f
+connectTimes	tcpcheck-bulk.py	/^    connectTimes = int(sys.argv[3])     # use port from ARGV 3$/;"	v
+count	tcpcheck-bulk.py	/^count = 0$/;"	v
+create_host	zabbix-setup.sh	/^create_host() {$/;"	f
+failurecount	tcpcheck-bulk.py	/^failurecount = 0$/;"	v
+fromaddr	page.py	/^fromaddr = "noreply@example.com"$/;"	v
+get_am2_ami	zsh_aws_aliases.sh	/^function get_am2_ami() {$/;"	f
+get_ubuntu_ami	zsh_aws_aliases.sh	/^function get_ubuntu_ami() {$/;"	f
+ip_local_port_range	sysctl.conf	/^net.ipv4.ip_local_port_range = 1024	65535$/;"	k
+mapleader	.vimrc	/^let mapleader = " "$/;"	v
+msg	page.py	/^msg = ("From: %s\\r\\nTo: %s\\r\\nSubject: %s\\r\\n\\r\\n"$/;"	v
+msg	page.py	/^msg = msg + sys.argv[1]$/;"	v
+netdev_max_backlog	sysctl.conf	/^net.core.netdev_max_backlog=30000$/;"	k
+optmem_max	sysctl.conf	/^net.core.optmem_max=20480$/;"	k
+parser	make-s3-psurl.py	/^    parser = argparse.ArgumentParser(description='Make a S3 presigned URL for key in bucket.')$/;"	v
+presign_url	make-s3-psurl.py	/^def presign_url(bucket, key, expiry, profile, region):$/;"	f
+prompt	page.py	/^def prompt(prompt):$/;"	f
+rmem_default	sysctl.conf	/^net.core.rmem_default = 256960$/;"	k
+rmem_default	sysctl.conf	/^net.core.rmem_default=262141$/;"	k
+rmem_max	sysctl.conf	/^net.core.rmem_max = 256960 $/;"	k
+rmem_max	sysctl.conf	/^net.core.rmem_max=262141$/;"	k
+s	tcpcheck-bulk.py	/^        s = socket(AF_INET, SOCK_STREAM)    #create a TCP socket$/;"	v
+s	tcpcheck.py	/^	s = socket(AF_INET, SOCK_STREAM)	#create a TCP socket$/;"	v
+s3_url	make-s3-psurl.py	/^    s3_url = presign_url(args.s3_bucket, args.s3_key, args.s3_expiry, args.profile, args.region)$/;"	v
+server	page.py	/^server = smtplib.SMTP('server.ip.or.hostname')$/;"	v
+serverHost	tcpcheck-bulk.py	/^    serverHost = sys.argv[1]        # use port from ARGV 1$/;"	v
+serverHost	tcpcheck.py	/^	serverHost = sys.argv[1]		# use port from ARGV 1$/;"	v
+serverPort	tcpcheck-bulk.py	/^    serverPort = int(sys.argv[2])       # use port from ARGV 2$/;"	v
+serverPort	tcpcheck.py	/^	serverPort = int(sys.argv[2])		# use port from ARGV 2$/;"	v
+setup_raid	setup-ec2-raid-0.sh	/^function setup_raid {$/;"	f
+somaxconn	sysctl.conf	/^net.core.somaxconn=256$/;"	k
+ss	.vimrc	/^cnoremap ss so $vim\/sessions\/*.vim<C-Z>$/;"	m
+subject	page.py	/^subject = "[ALERT] Alert from localhost"$/;"	v
+successcount	tcpcheck-bulk.py	/^successcount = 0$/;"	v
+tcp_challenge_ack_limit	sysctl.conf	/^net.ipv4.tcp_challenge_ack_limit = 999999999$/;"	k
+tcp_dsack	sysctl.conf	/^net.ipv4.tcp_dsack=0$/;"	k
+tcp_fin_timeout	sysctl.conf	/^net.ipv4.tcp_fin_timeout = 15$/;"	k
+tcp_fin_timeout	sysctl.conf	/^net.ipv4.tcp_fin_timeout=60$/;"	k
+tcp_keepalive_intvl	sysctl.conf	/^net.ipv4.tcp_keepalive_intvl=30$/;"	k
+tcp_keepalive_probes	sysctl.conf	/^net.ipv4.tcp_keepalive_probes=3$/;"	k
+tcp_keepalive_time	sysctl.conf	/^net.ipv4.tcp_keepalive_time = 1200$/;"	k
+tcp_keepalive_time	sysctl.conf	/^net.ipv4.tcp_keepalive_time=120$/;"	k
+tcp_max_tw_buckets	sysctl.conf	/^net.ipv4.tcp_max_tw_buckets=2000000$/;"	k
+tcp_retries2	sysctl.conf	/^net.ipv4.tcp_retries2=5$/;"	k
+tcp_sack	sysctl.conf	/^net.ipv4.tcp_sack = 1$/;"	k
+tcp_sack	sysctl.conf	/^net.ipv4.tcp_sack=0$/;"	k
+tcp_timestamps	sysctl.conf	/^net.ipv4.tcp_timestamps = 0$/;"	k
+tcp_tw_reuse	sysctl.conf	/^net.ipv4.tcp_tw_reuse = 1$/;"	k
+tcp_window_scaling	sysctl.conf	/^net.ipv4.tcp_window_scaling = 1$/;"	k
+test_re	test_regular_expression.py	/^def test_re(my_pattern, test_line):$/;"	f
+toaddrs	page.py	/^toaddrs = ['userA@example.com']$/;"	v
+try_get	download_file_with_exponential_backoff_function.sh	/^function try_get {$/;"	f
+try_get_old	download_file_with_exponential_backoff_function.sh	/^function try_get_old {$/;"	f
+update_ec2_regions	zsh_aws_aliases.sh	/^update_ec2_regions() {$/;"	f
+wmem_default	sysctl.conf	/^net.core.wmem_default = 256960$/;"	k
+wmem_default	sysctl.conf	/^net.core.wmem_default=262141$/;"	k
+wmem_max	sysctl.conf	/^net.core.wmem_max = 256960 $/;"	k
+wmem_max	sysctl.conf	/^net.core.wmem_max=262141$/;"	k
