@@ -50,6 +50,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
     Plug 'gruvbox-community/gruvbox'
     Plug 'tpope/vim-fugitive'
+    Plug 'vim-python/python-syntax'                    " Python highlighting
+    Plug 'ap/vim-css-color'                            " Color previews for CSS
+    Plug 'powerline/powerline'
+    Plug 'vim-airline/vim-airline'                      " https://github.com/vim-airline/vim-airline
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'bling/vim-bufferline'                         " https://github.com/bling/vim-bufferline
+    Plug 'vifm/vifm.vim'                               " Vifm
+
 "Neovim only?
 "    Plug 'nvim-lua/telescope.nvim'
     " ...
@@ -62,6 +70,15 @@ colorscheme gruvbox
 " Neovim only?
 " mode lhs rhs
 "nnoremap <leader>ps
+
+
+" https://github.com/vim-airline/vim-airline
+" AirlineTheme solarized
+" let g:airline_solarized_bg='dark'
+" let g:airline_theme='solarized'
+let g:airline_theme='badwolf'
+" let g:airline_theme='solarized'
+" let g:airline_solarized_bg='dark'
 
 " Remaps things into functions, start with a space on the ex: line?
 let mapleader = " "
@@ -144,5 +161,76 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " - check |netrw-browse-maps| for more mappings
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Merging in some changes from DistroTube https://www.youtube.com/DistroTube
+" per https://www.youtube.com/watch?v=Zir28KFCSQw
+" https://gitlab.com/dwt1/dotfiles/-/blob/master/.vimrc
 
-" SNIPPETS:
+" => NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=38
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vifm - file manager, kinda meh, should disable
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader>vv :Vifm<CR>
+map <Leader>vs :VsplitVifm<CR>
+map <Leader>sp :SplitVifm<CR>
+map <Leader>dv :DiffVifm<CR>
+map <Leader>tv :TabVifm<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Splits and Tabbed Files
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set splitbelow splitright
+
+" Remap splits navigation to just CTRL + hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Open terminal inside Vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" map <Leader>tt :vnew term://zsh<CR>
+" map <Leader>tt :vnew term://zsh<CR>
+" let &shell='/bin/zsh -i'
+autocmd vimenter * let &shell='/bin/zsh -i'
+
+" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
+" Removes pipes | that act as seperators on splits
+set fillchars+=vert:\
+
+
+
+" set t_Co=256                    " Set if term supports 256 colors.
+" Always show statusline
+" set laststatus=2
+" Uncomment to prevent non-normal modes showing in powerline and below powerline.
+" set noshowmode
+
+
+""" powerline but no worky https://linuxconfig.org/introduction-to-powerline-the-statusline-plugin-for-vim
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
+
+
