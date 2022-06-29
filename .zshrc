@@ -96,6 +96,8 @@ if [ "${UNAME}" = "Darwin" ]
 fi
 
 jitter() {
+    # Use like this in shell
+    # sleep $(jitter)
     unset J1
     J1=${RANDOM}
     unset J2
@@ -104,6 +106,10 @@ jitter() {
     M1=$(echo "${J1} * ${J2}" | bc)
     JIT=$(echo "${M1} % 10 * .1" | bc)
     echo "${JIT}"
+    # tests to see how it works:
+    # Run it 10 times, just see the variety
+    # You should see single-digit numbers between 0 and 1, e.g. '.4'
+    # $ for x in {1..10}; do jitter; done
 }
 
 retry() {
@@ -711,4 +717,6 @@ alias -g SUS=" | sort | uniq -c | sort -nr | head -n 25"
 # alias -g XG='| xargs egrep'
 # alias -g X='| xargs'
 
+alias sag="sudo apt-get install "
+alias sac="sudo apt-cache search "
 
