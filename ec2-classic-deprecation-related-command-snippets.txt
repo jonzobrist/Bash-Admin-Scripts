@@ -1,0 +1,26 @@
+In 1 region for ELBs you can get a list of CLBs in EC2 classic by running:
+
+```
+R="us-east-1"; aws --region ${R} elb describe-load-balancers --query 'LoadBalancerDescriptions[?Subnets == `[]`].LoadBalancerName'
+```
+
+If you want to check all regions (not filtered for ones that only have VPC)
+(The tee and file are just to stop the aws cli from blocking output to your pager)
+
+```
+F=$(mktemp); for R in $(aws ec2 describe-regions --query "Regions[].RegionName" --output text); do echo "Classic load balancers in ${R}:"; aws --region ${R} elb describe-load-balancers --query 'LoadBalancerDescriptions[?Subnets == `[]`].LoadBalancerName' | tee -a ${F}; done; echo "results also in file ${F} at $(date)";
+```
+
+This will tell you if your account has EC2 Classic:
+
+```
+aws ec2 describe-account-attributes --query 'AccountAttributes[?AttributeValues[?AttributeValue == `EC2`]]'
+```
+
+From the [migration from EC2 Classic to EC2 VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html), this will tell you if you have any EC2 instances in EC2 Classic:
+
+```
+aws ec2 describe-instances --query 'Reservations[*].Instances[?VpcId==`null`]'
+```
+
+
