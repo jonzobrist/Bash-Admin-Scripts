@@ -5,6 +5,7 @@ set expandtab
 set smartindent
 set nowrap
 
+" neeed this first - curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " enable syntax and plugins (for netrw)
 syntax enable
 filetype plugin on
