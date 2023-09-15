@@ -720,3 +720,11 @@ alias -g SUS=" | sort | uniq -c | sort -nr | head -n 25"
 alias sag="sudo apt-get install "
 alias sac="sudo apt-cache search "
 
+if [ -e "$HOME/.cargo/env" ]
+ then
+    source "$HOME/.cargo/env"
+fi
+
+WORK_ZSHRC="${WORK_ZSHRC:-${HOME}/.zshrc-work}"
+if [ -f "${WORK_ZSHRC}" ]; then source "${WORK_ZSHRC}"; fi
+
